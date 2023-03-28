@@ -20,3 +20,14 @@ function wordCounter(text) {
   });
   return wordCount; 
 }
+// needs 2 parameters - one for the word we're looking for, and one for the whole text itself
+function numberOfOccurrencesInText(word, text) {
+  const textArray = text.split(" ");
+  let wordCount = 0;
+  textArray.forEach(function(element) {
+    if (element.toLowerCase().includes(word.toLowerCase())) {
+      wordCount++;
+    }
+  });
+  return wordCount; 
+}
