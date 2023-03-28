@@ -31,3 +31,21 @@ function numberOfOccurrencesInText(word, text) {
   });
   return wordCount; 
 }
+
+
+function omitOffensiveWords(text) {
+  let textArray = text.split(" ");
+  let badWords = ['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop'];
+  let badString = badWords.toString();
+  let returnArray = [];
+
+  textArray.forEach(element => {
+    if (badString.toLowerCase().includes(element.toLowerCase())) {
+      returnArray.push("******");
+    } else {
+      returnArray.push(element);
+    }
+  });
+  return returnArray.toString(' ').replaceAll(',', ' '); 
+}
+
