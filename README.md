@@ -37,7 +37,12 @@ numberOfOccurrencesInText(word, text);
 Expected Output: 0
 
 Test: "It should return 1 occurrence of a word when the word and the text are the same."
-Code:
+Code: function numberOfOccurrencesInText(word, text) {
+  if (word === text) {
+    return 1;
+  }
+  return 0;
+}
 const text = "red";
 const word = "red";
 numberOfOccurrencesInText(word, text);
@@ -152,22 +157,27 @@ omitOffensiveWord()
 Expected Output: "hello "
 
 
-Test: "it should replace any of the bad words in the array with the word " "
+Test: "it should replace any of the bad words in the array with the word "****"
 Code: 
-function wordTest(stringParam) {
-  const badWordArray = ["zoinks","muppeteer","loopdaloop","biffaroni"];
-  badWordArray.forEach(function(element) {
-    if (stringParam.includes(element)) {
-      return stringParam.replace(element, " ");
-      console.log("hello there");
+function omitOffensiveWords(text) {
+  let textArray = text.split(" ");
+  let badWords = ['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop'];
+  let badString = badWords.toString();
+  let returnArray = [];
+
+  textArray.forEach(element => {
+    if (badString.toLowerCase().includes(element.toLowerCase())) {
+      returnArray.push("******");
+    } else {
+      returnArray.push(element);
     }
-    return stringParam;
   });
+  return returnArray.toString(' ').replaceAll(',', ' '); 
 }
 const text = "hello zoinks"
 const word = 
 omitOffensiveWord();
-Expected Output: "hello "
+Expected Output: "hello *****"
 
 __________________________
 Describe: boldPassage()
@@ -240,3 +250,104 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: <p><strong>hello</strong> there</p>
+
+___________________________
+Describe: organizeCommonWords()
+
+Test: "It should return 0 occurrences of a word for an empty string."
+Code: function organizeCommonWords(text) {
+  if (isEmpty(text)) {
+    return 0;
+  }
+  }
+const text = "";
+const word = "";
+numberOfOccurrencesInText(word, text);
+Expected Output: 0
+
+Test: "It should return 1 occurrence of a word when the word and the text are the same."
+Code: function organizeCommonWords(word, text) {
+  if (word === text) {
+    return 1;
+  }
+  return 0;
+}
+const text = "hey";
+const word = "hey";
+numberOfOccurrencesInText(word, text);
+Expected Output: 1
+
+Test: "It should return 0 occurrences of a word when the word and the text are different."
+Code: same code as above
+const text = "red";
+const word = "blue";
+numberOfOccurrencesInText(word, text);
+Expected Output: 0
+
+Test: "It should return the number of occurrences of a word."
+Code: function organizeCommonWords(word,text) {
+  const textArray = text.split(" ");
+  let wordCount = 0;
+  textArray.forEach(function(element) {
+    if (word === element) {
+      wordCount++;
+    }
+  });
+  return wordCount;
+}
+const text = "hi hey hi hi hey hi";
+const word = "hi";
+numberOfOccurrencesInText(word, text);
+Expected Output: 4
+
+Test: "It should return a word match regardless of case."
+Code: function organizeCommonWords(word, text) {
+  const textArray = text.split(" ");
+  let wordCount = 0;
+  textArray.forEach(function(element) {
+    if (word.toLowerCase() === element.toLowerCase()) {
+      wordCount++;
+    }
+  });
+  return wordCount;
+}
+const text = "hey HEY hi Hey HEY";
+const word = "hey";
+numberOfOccurrencesInText(word, text);
+Expected Output: 4
+
+Test: "It should return a word match regardless of punctuation."
+Code: function organizeCommonWords(word, text) {
+  const textArray = text.split(" ");
+  let wordCount = 0;
+  textArray.forEach(function(element) {
+    if (element.toLowerCase().includes(word.toLowerCase())) {
+      wordCount++;
+    }
+  });
+  return wordCount;
+}
+const text = "Red! Red. I like red, green, and yellow.";
+const word = "Red";
+numberOfOccurrencesInText(word, text);
+Expected Output: 3
+
+Test: "It should start recording number of common words for each word"
+Code: let wordArray = [];
+function organizeCommonWords(str) {
+  if (isEmpty(str)) {
+    return 0;
+  }
+  split = str.split(" ");
+
+  for(let i=0; i<split.length; i++) {
+    if (wordArray[split[i]] === undefined) {
+      wordArray[split[i]] = 1;
+    } else {
+      wordArray[split[i]]++;
+    }
+  }
+}
+const text = "hey hey you there hey"
+const word = n/a
+Expected Output: hey:3, you:1, there:1; 

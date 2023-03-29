@@ -1,11 +1,14 @@
 // Utility Logic
-
-function isEmpty(testString) {
-  return (testString.trim().length === 0);
+function isEmpty() {
+  for (let i=0; i < arguments.length; i++) {
+    if (arguments[i].trim().length === 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // Business Logic
-
 function wordCounter(text) {
   if (isEmpty(text)) {
     return 0;
@@ -34,10 +37,37 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
-// UI Logic
+let wordArray = [];
+function organizeCommonWords(str) {
+  if (isEmpty(str)) {
+    return 0;
+  }
+  split = str.split(" ");
 
+  for(let i=0; i<split.length; i++) {
+    if (wordArray[split[i]] === undefined) {
+      wordArray[split[i]] = 1;
+    } else {
+      wordArray[split[i]]++;
+    }
+  }
+  return wordArray.sort(organizeCommonWords);
+}
+
+function firstInstanceOfWord(word, text) {
+  const textArray = text.split(" ");
+  for (let i = 0; i < textArray.length; i++) {
+    console.log(i);
+    if (word === textArray[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// UI Logic
 function boldPassage(word, text) {
-  if (isEmpty(word) || isEmpty(text)) {
+  if (isEmpty(word, text)) {
     return null;
   }
   const p = document.createElement("p");
@@ -57,6 +87,7 @@ function boldPassage(word, text) {
   return p;
 }
 
+// UI logic 
 function handleFormSubmission(event) {
   event.preventDefault();
   const passage = document.getElementById("text-passage").value;
@@ -122,7 +153,6 @@ window.addEventListener("load", function() {
 //   });
 //   return wordCount; 
 // }
-
 
 // function omitOffensiveWords(text) {
 //   let textArray = text.split(" ");
